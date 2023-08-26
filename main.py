@@ -26,13 +26,16 @@ print("")
 
 #program that prints all the data
 
-while i <= 30:
-    theDay = theDay + timedelta(1)
-    response_API = requests.get("https://www.nytimes.com/svc/wordle/v2/" + str(theDay) + ".json")
-    data = response_API.text
-    parse_json = json.loads(data)
-    print(parse_json['solution'] + " <-- " + str(theDay))
-    i = i + 1
+try:
+    while i == 0:
+        theDay = theDay + timedelta(1)
+        response_API = requests.get("https://www.nytimes.com/svc/wordle/v2/" + str(theDay) + ".json")
+        data = response_API.text
+        parse_json = json.loads(data)
+        print(parse_json['solution'] + " <-- " + str(theDay))
+except Exception as e:
+    print("There is no answers beyond the last date listed")
+    i = 1
 
 #ending graphic
 
